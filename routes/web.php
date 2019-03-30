@@ -11,6 +11,20 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/services','PagesController@services');
+
+Route::view('login', 'pages.login');
+Route::view('signup', 'pages.signup');
+
+
+## Pruebas para entender rutas
+Route::get('/prueba/{id}/nombre/{name}', function($id, $name){
+    return 'This is the user '. $name . ' with id '. $id;
+});
+## return the view automatically => BLADE
+Route::view('/welcome','welcome');
