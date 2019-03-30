@@ -58,9 +58,25 @@ body {
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
     <label for="inputPassword2" class="sr-only">Repeat Password</label>
-    <input type="password" id="inputPassword2" class="form-control" placeholder="Repeat Password" required autofocus>
+    <input type="password" id="inputPassword2" class="form-control" placeholder="Repeat Password" required>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+    <script>
+      var password = document.getElementById("inputPassword")
+      , confirm_password = document.getElementById("inputPassword2");
+
+      function validatePassword(){
+        if(password.value != confirm_password.value) {
+          confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+          confirm_password.setCustomValidity('');
+        }
+      }
+
+      password.onchange = validatePassword;
+      confirm_password.onkeyup = validatePassword;
+    </script>
 </form>
 </body>
 @endsection
