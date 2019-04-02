@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nothing')
 
 @section('content')
 <div class="container">
@@ -65,6 +65,12 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="card-body">
+                        <a class="btn btn-link" href="{{ route('register') }}">
+                            {{ __("I don't have an account") }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

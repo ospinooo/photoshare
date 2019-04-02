@@ -52,7 +52,12 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         
         {{-- Appear only when the user is not logged --}}
-        <a class="nav-item nav-link" href="/login">Login</a>
+        @if (Auth::check())
+            <a class="nav-item nav-link" href="/logout">Logout</a>    
+        @else
+            <a class="nav-item nav-link" href="/login">Login</a>    
+        @endif
+        
         </form>
     </div>
 </nav>
