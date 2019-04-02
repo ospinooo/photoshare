@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
         //
     ];
 
-    protected $middleware = [
+    /*protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
  
         //custom middleware for https redirect
         \App\Http\Middleware\HttpsMiddleware::class
-    ];
+    ];*/
 
     /**
      * Define the application's command schedule.
