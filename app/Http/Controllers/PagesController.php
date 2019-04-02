@@ -13,4 +13,8 @@ class PagesController extends Controller
         );
         return view('pages.services')->with($data);
     }
+
+    public function about(){
+        return view('pages.about');
+    }
 }
