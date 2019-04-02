@@ -16,10 +16,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/about', 'PagesController@about');
 Route::get('/services','PagesController@services');
 Route::resource('posts', 'PostsController');
-Route::view('login', 'pages.login');
-Route::view('signup', 'pages.signup');
+
+Route::view('/welcome','welcome');
+// Route::view('login', 'pages.login');
+// Route::view('signup', 'pages.signup');
 
 
 ## Pruebas para entender rutas
@@ -27,4 +30,7 @@ Route::get('/prueba/{id}/nombre/{name}', function($id, $name){
     return 'This is the user '. $name . ' with id '. $id;
 });
 ## return the view automatically => BLADE
-Route::view('/welcome','welcome');
+
+Auth::routes();
+Auth::routes(['verify' => true]);
+Route::get('/home', 'HomeController@index')->name('home');

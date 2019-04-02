@@ -16,19 +16,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/services">Services</a>
+                <a class="nav-link" href="/posts">Posts</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/posts/create">Create Post</a>
-            </li>
-            
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="/posts/create">Create Post</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
