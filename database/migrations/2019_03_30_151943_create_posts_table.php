@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->mediumText('body');
             $table->timestamps();
-            $table->exif_imagetype('image');
         });
     }
 
