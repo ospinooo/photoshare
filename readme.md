@@ -27,7 +27,8 @@ npm run dev # recompile-libraries (Changes colors)
 ## Migrate
 Deletes all data into the database and create the new tables specified in migration folder
 ```
-php artisan migrate:refresh
+php artisan migrate
+php artisan migrate:refresh # All
 ```
 
 ## About Laravel
