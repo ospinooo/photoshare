@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
     /**
+     * 
+     */
+    public function __construct()
+    {
+        
+        //Add middleware to controllers $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
