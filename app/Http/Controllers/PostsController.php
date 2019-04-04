@@ -60,7 +60,13 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = Auth::id();
+
         $post->save();
+        
+        // $post = Post::create($request->all());
+        foreach ($request->input('document', []) as $file) {
+            $post->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
+        }
 
         return redirect('/posts')->with('success', 'Post Created');
     }
@@ -119,5 +125,28 @@ class PostsController extends Controller
     {
         $post->delete();
         return redirect('/posts')->with('success', 'Post Deleted');
+    }
+
+
+    /**
+     * 
+     */
+    public function storeMedia(Request $request){
+        $path = storage_path('tmp/uploads');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $file = $request->file('file');
+
+        $name = uniqid() . '_' . trim($file->getClientOriginalName());
+
+        $file->move($path, $name);
+
+        return response()->json([
+            'name'          => $name,
+            'original_name' => $file->getClientOriginalName(),
+        ]);   
     }
 }

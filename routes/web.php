@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/about', 'PagesController@about');
 Route::get('/services','PagesController@services');
 Route::resource('posts', 'PostsController');
-
+Route::post('posts/media', 'PostsController@storeMedia')->name('posts.media');
 Route::view('/welcome','welcome');
 // Route::view('login', 'pages.login');
 // Route::view('signup', 'pages.signup');
