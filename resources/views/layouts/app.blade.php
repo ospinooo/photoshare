@@ -18,8 +18,8 @@
         <title>{{config('app.name', 'Photoshare')}}</title>
     </head>
     <body>
-        
         @include('include.navbar')
+        <hr>
         <div class="container">
             @include('include.messages')
             @yield('content')
