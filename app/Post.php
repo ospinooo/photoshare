@@ -42,8 +42,13 @@ class Post extends Model implements HasMedia
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
+    
     // Relation
     public function user(){
         return $this->belongsTo('App\User');
+    }
+
+    public function category(){
+        return $this->belongsTo('App\Category');
     }
 }
