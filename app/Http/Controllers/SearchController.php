@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post; //For searching posts
-use App\User; //For searching users
+use DB;
 
-class SearchController extends Controller
-{
-    public function __invoke(){
-        //Mostrar resultados
-        $query = $_GET['query'];
-        return "Mostrando resultados para {$query}";
+class SearchController extends Controller{
+    public function index(){
+        return view('search.search');
+    }
+    public function search(Request $request){
+        if($request->ajax()){
+            $output="";
+            $posts=DB::table('posts')->where('title','LIKE','%'.$request->search."%")->get();
+            if($posts){
+                foreach ($posts as $key => $post) {
+                    $output.='<tr>'.
+                    '<td>'.$posts->id.'</td>'.
+                    '<td>'.$posts->title.'</td>'.
+                    '<td>'.$posts->body.'</td>'.
+                    '</tr>';
+                }
+                return Response($output);
+            }
+        }
     }
 }
-
-

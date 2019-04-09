@@ -15,7 +15,7 @@ ssh grupo30@webalumnos.tlm.unavarra.es -p 10700
 ```
 
 ```
-mysql  -h dbserver -u grupo30 -p
+mysql -h dbserver -u grupo30 -p
 ```
 
 ## Bootstrap
