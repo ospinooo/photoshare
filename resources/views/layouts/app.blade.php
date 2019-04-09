@@ -22,6 +22,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
         @yield('scripts')
         <title>{{config('app.name', 'Photoshare')}}</title>
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                position: relative;
+                padding-bottom: 40px;
+            }
+    </style>
     </head>
     <body>
         @include('include.navbar')
@@ -29,7 +39,7 @@
         <div class="container">
             @include('include.messages')
             @yield('content')
-            @include('include.footer')
         </div>
+        @include('include.footer')
     </body>
 </html>
