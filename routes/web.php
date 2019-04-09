@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/search', 'SearchController');
 Route::get('/about', 'PagesController@about');
 Route::get('/services','PagesController@services');
 Route::resource('posts', 'PostsController');
@@ -37,5 +38,3 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('/search', 'SearchController');
