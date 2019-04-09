@@ -3,26 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use App\Post; //For searching posts
+use App\User; //For searching users
+use App\Category;
 
-class SearchController extends Controller{
-    public function index(){
-        return view('search.search');
-    }
-    public function search(Request $request){
-        if($request->ajax()){
-            $output="";
-            $posts=DB::table('posts')->where('title','LIKE','%'.$request->search."%")->get();
-            if($posts){
-                foreach ($posts as $key => $post) {
-                    $output.='<tr>'.
-                    '<td>'.$posts->id.'</td>'.
-                    '<td>'.$posts->title.'</td>'.
-                    '<td>'.$posts->body.'</td>'.
-                    '</tr>';
-                }
-                return Response($output);
-            }
+class SearchController extends Controller
+{
+    /**
+     * 
+     * 
+     */
+    public function __invoke(Request $request){
+
+        if ($request->key== null || $request->key==''){
+            return '<a class="dropdown-item">...</a>';
         }
+        
+        $categories = DB::table('categories')->where('name','like',"%".$request->key."%")->limit(5)->get();
+        return view('include.dropdown')->with('categories', $categories);
     }
 }
