@@ -29,6 +29,7 @@
         <div class="container">
             @include('include.messages')
             @yield('content')
+            @include('include.footer')
         </div>
     </body>
 </html>

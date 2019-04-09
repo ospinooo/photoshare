@@ -34,8 +34,9 @@ Route::get('/prueba/{id}/nombre/{name}', function($id, $name){
 });
 ## return the view automatically => BLADE
 
-Route::get('storage/{filename}', function ($filename)
+Route::any('/storage/{filename}', function ($filename)
 {
+    return $filename;
     $path = storage_path('public/' . $filename);
 
     if (!File::exists($path)) {
