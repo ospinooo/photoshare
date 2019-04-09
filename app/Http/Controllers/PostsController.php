@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +40,13 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = DB::table('categories')->get();
+        $cat =[];
+        for ($i =0; $i<count($categories);$i++) {
+            $c = $categories[$i];
+            $cat[$c->id] = $c->name;
+        }
+        return view('posts.create')->with('categories', $cat);
     }
 
     /**
@@ -53,12 +60,14 @@ class PostsController extends Controller
         // list of rules
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'category' => 'required'
         ]);
         
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->category_id = $request->input('category');
         $post->user_id = Auth::id();
 
         $post->save();
@@ -90,7 +99,13 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit')->with('post', $post);
+        $categories = DB::table('categories')->get();
+        $cat =[];
+        for ($i =0; $i<count($categories);$i++) {
+            $c = $categories[$i];
+            $cat[$c->id] = $c->name;
+        }
+        return view('posts.edit')->with('post', $post)->with('categories', $cat);
     }
 
     /**
@@ -105,11 +120,13 @@ class PostsController extends Controller
         // list of rules
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'category' => 'required'
         ]);
         
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->category_id = $request->input('category');
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Updated');
