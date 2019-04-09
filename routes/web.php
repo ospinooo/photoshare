@@ -25,8 +25,10 @@ Route::view('/welcome','welcome');
 // Route::view('signup', 'pages.signup');
 
 
-## Pruebas para entender rutas
+//Ruta al usuario
 Route::get('/prueba/{id}/nombre/{name}', function($id, $name){
+    //Aquí debería retornar una página genérica de usuario en la que se
+    //muestran los datos del usuario con ese id.
     return 'This is the user '. $name . ' with id '. $id;
 });
 ## return the view automatically => BLADE
@@ -35,3 +37,5 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/search', 'SearchController');
