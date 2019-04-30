@@ -24,12 +24,12 @@
         <title>{{config('app.name', 'Photoshare')}}</title>
         <style>
             body {
-                padding: 0;
-                margin: 0;
+            padding: 0;
+            margin: 0;
             }
             .container {
-                position: relative;
-                padding-bottom: 40px;
+            position: relative;
+            padding-bottom: 40px;
             }
     </style>
     </head>

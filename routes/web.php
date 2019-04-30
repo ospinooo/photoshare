@@ -12,10 +12,7 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'PostsController@rankingIndex');
 Route::get('/search', 'SearchController');
 Route::get('/about', 'PagesController@about');
 Route::get('/services','PagesController@services');

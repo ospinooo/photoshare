@@ -166,4 +166,13 @@ class PostsController extends Controller
             'original_name' => $file->getClientOriginalName(),
         ]);   
     }
+
+
+    /**
+     * 
+     */
+    public function rankingIndex(Request $request){
+        $posts = Post::orderBy('likes','desc')->paginate(10);
+        return view('posts.ranking')->with('posts', $posts);
+    }
 }
