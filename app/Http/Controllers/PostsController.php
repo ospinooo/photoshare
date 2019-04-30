@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
     /**
-     * 
+     *
      */
     public function __construct()
     {
-        
+
         //Add middleware to controllers $this->middleware('auth');
     }
 
@@ -63,7 +63,7 @@ class PostsController extends Controller
             'body' => 'required',
             'category' => 'required'
         ]);
-        
+
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
@@ -71,7 +71,7 @@ class PostsController extends Controller
         $post->user_id = Auth::id();
 
         $post->save();
-        
+
         // $post = Post::create($request->all());
         foreach ($request->input('document', []) as $file) {
             $post->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
@@ -123,7 +123,7 @@ class PostsController extends Controller
             'body' => 'required',
             'category' => 'required'
         ]);
-        
+
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->category_id = $request->input('category');
@@ -146,7 +146,7 @@ class PostsController extends Controller
 
 
     /**
-     * 
+     *
      */
     public function storeMedia(Request $request){
         $path = storage_path('tmp/uploads');
@@ -164,15 +164,15 @@ class PostsController extends Controller
         return response()->json([
             'name'          => $name,
             'original_name' => $file->getClientOriginalName(),
-        ]);   
+        ]);
     }
 
 
     /**
-     * 
+     *
      */
     public function rankingIndex(Request $request){
-        $posts = Post::orderBy('likes','desc')->paginate(10);
+        $posts = Post::orderBy('id','desc')->paginate(10);
         return view('posts.ranking')->with('posts', $posts);
     }
 }
