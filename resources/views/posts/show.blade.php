@@ -6,11 +6,11 @@
       .carousel-multi-item-2 .col-md-3 {
         float: left;
         width: 25%;
-        max-width: 100%; } 
+        max-width: 100%; }
       }
 
       .carousel-multi-item-2 .card img {
-        border-radius: 2px; 
+        border-radius: 2px;
       }
 
       .feature>img {
@@ -20,18 +20,39 @@
     </style>
 
     <a href="/posts" class="btn btn-default">Go Back</a>
-    <h1>{{$post->title}}</h1>
+    <h1>{{$post->title}}
+      @if (True)
+        <button id="like" value="True" onclick="changeLike()"class="btn"><i class="far fa-heart fa-2x"></i></button>
+      @else
+        <button id="like" value="False" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+      @endif
+    </h1>
+
+    <script>
+      var like_button = document.getElementById('like');
+      function changeLike() {
+          if (like_button.value == "True") {
+            like_button.value = "False";
+            like_button.innerHTML = '<i class="fas fa-heart fa-2x"></i>';
+          } else {
+            like_button.value = "True";
+            like_button.innerHTML = '<i class="far fa-heart fa-2x"></i>';
+          }
+      }
+
+    </script>
+
     <div>
         {{$post->body}}
     </div>
 
-    @if (count($post->getMedia('document')) > 0)  
+    @if (count($post->getMedia('document')) > 0)
       <hr>
       <div class="feature">
         <img id="0" class="featured-item" src="{{$post->getMedia('document')[0]->getUrl('medium')}}"></img>
       </div>
       <!--Carousel Wrapper-->
-      <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel">
+      <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel" align="center">
         @if (count($post->getMedia('document')) > 4)
           <!--Controls-->
           <div class="controls-top">
@@ -42,14 +63,14 @@
         @endif
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
-          
+
           <div class="carousel-item active">
           {{-- <p>{{count($post->getMedia('document'))}} </p> --}}
           @for ($i = 0; $i < count($post->getMedia('document')); $i++)
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" id="{{$i}}" src="{{$post->getMedia('document')[$i]->getUrl('small')}}"
-                alt="Card image cap">
+                alt="Card image cap" width="100%" height="50%">
               </div>
             </div>
             @if ((($i + 1) % 4 == 0) && (($i+1) < count($post->getMedia('document'))))
@@ -60,106 +81,106 @@
           </div>
           <!--First slide-->
           {{-- <div class="carousel-item active">
-            
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(38).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(19).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(42).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(8).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
           </div>
           <!--/.First slide--> --}}
-      
+
           <!--Second slide-->
           {{-- <div class="carousel-item">
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
           </div> --}}
           <!--/.Second slide-->
-      
+
           <!--Third slide-->
           {{-- <div class="carousel-item">
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(64).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(51).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(59).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
             <div class="col-md-3 mb-3">
               <div class="card">
                 <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(63).jpg"
                   alt="Card image cap">
               </div>
             </div>
-      
+
           </div> --}}
           <!--/.Third slide-->
-      
+
         </div>
         <!--/.Slides-->
         <!--/.Carousel Wrapper-->
@@ -271,10 +292,10 @@
             <div class="col-sm-3"><div class="arrow arrow-left text-center"><<</div></div>
             <div class="col-sm-6"><img class="modal-content" id="img01"></div>
             <div class="col-sm-3"><div class="arrow arrow-right text-center">>></div></div>
-          </div> 
+          </div>
         <!-- Modal Content (The Image) -->
-        
-      
+
+
         <!-- Modal Caption (Image Text) -->
         <div id="caption"></div>
       </div>
@@ -292,13 +313,13 @@
 
       // Get the image and insert it inside the modal - use its "alt" text as a caption
       var modalImg = document.getElementById("img01");
-      var captionText = document.getElementById("caption"); 
-    
+      var captionText = document.getElementById("caption");
+
 
       var arrow_left = document.querySelector('.arrow-left');
       var arrow_right = document.querySelector('.arrow-right');
 
-      arrow_left.onclick = function () {        
+      arrow_left.onclick = function () {
         var id;
         if (featured.id == 0) {
           id = galleryItems.length-1;
@@ -330,13 +351,13 @@
         captionText.innerHTML = this.alt;
       }
 
-      
+
 
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
 
       // When the user clicks on <span> (x), close the modal
-      span.onclick = function() { 
+      span.onclick = function() {
         modal.style.display = "none";
       }
 
