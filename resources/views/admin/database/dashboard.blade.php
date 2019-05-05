@@ -2,27 +2,28 @@
 @extends('admin.layouts.app')
 @section('content')
 
-@foreach ($models as $model)
-  <p>{{$model}}</p>
-@endforeach
 
+<h1>{{$title}}</h1>
 <table class="table table-striped table-hover table-users">
   <thead>
     <tr>
     @foreach (array_keys($models[0]->getAttributes()) as $title)
-      <th class="hidden-phone">{{$title}}</th>
+      @if ($title != 'password')
+        <th class="hidden-phone">{{$title}}</th>
+      @endif
     @endforeach
     <th></th>
     <th></th>
     </tr>
   </thead>
 
-
   <tbody>
     @foreach ($models as $model)
       <tr>
         @foreach ($model->getAttributes() as $key => $value)
-          <td class="hidden-phone">{{$value}}</td>
+          @if ($key != 'password')
+            <td class="hidden-phone">{{$value}}</td>
+          @endif
         @endforeach
 
         <td>
@@ -38,6 +39,5 @@
       </tr>
     @endforeach
   </tbody>
-
 </table>
 @endsection

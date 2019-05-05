@@ -15,17 +15,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
+                <a class="nav-link" href="/admin/posts">Posts</a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/users">Users</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/categories">Categories</a>
+            </li>
+
+
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Actions
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/posts/create">Create Post</a>
                 </div>
-            </li>
+            </li> --}}
         </ul>
 
         <form class="form-inline my-2 my-lg-0" autocomplete="off">
