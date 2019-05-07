@@ -11,16 +11,22 @@ use App\Category;
 class SearchController extends Controller
 {
     /**
-     * 
-     * 
+     *
+     *
      */
     public function __invoke(Request $request){
 
         if ($request->key== null || $request->key==''){
             return '<a class="dropdown-item">...</a>';
         }
-        
+
         $categories = DB::table('categories')->where('name','like',"%".$request->key."%")->limit(5)->get();
-        return view('include.dropdown')->with('categories', $categories);
+        $users = DB::table('users')->where('name','like',"%".$request->key."%")->limit(5)->get();
+        $posts = DB::table('posts')->where('title','like',"%".$request->key."%")->limit(5)->get();
+        $items[0] = $categories;
+        $items[1] = $users;
+        $items[2] = $posts;
+
+        return view('include.dropdown')->with('items', $items);
     }
 }
