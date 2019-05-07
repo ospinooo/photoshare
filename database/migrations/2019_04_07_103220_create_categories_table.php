@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Category;
+
 
 class CreateCategoriesTable extends Migration
 {
@@ -19,16 +21,16 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('categories')->insert(array('name' => 'Paisajes'));
-        DB::table('categories')->insert(array('name' => 'Comida'));
-        DB::table('categories')->insert(array('name' => 'Juguetes'));
-        DB::table('categories')->insert(array('name' => 'Deporte'));
-        DB::table('categories')->insert(array('name' => 'Frases'));
-        DB::table('categories')->insert(array('name' => 'Vida'));
-        DB::table('categories')->insert(array('name' => 'Trabajo'));
-        DB::table('categories')->insert(array('name' => 'Viajes'));
-        DB::table('categories')->insert(array('name' => 'Tech'));
-        DB::table('categories')->insert(array('name' => 'Inteligencia Artificial'));
+        $cat = new Category(); $cat->name = 'Paisajes'; $cat->save();
+        $cat = new Category(); $cat->name = 'Comida'; $cat->save();
+        $cat = new Category(); $cat->name = 'Juguetes'; $cat->save();
+        $cat = new Category(); $cat->name = 'Deporte'; $cat->save();
+        $cat = new Category(); $cat->name = 'Frases'; $cat->save();
+        $cat = new Category(); $cat->name = 'Vida'; $cat->save();
+        $cat = new Category(); $cat->name = 'Trabajo'; $cat->save();
+        $cat = new Category(); $cat->name = 'Viajes'; $cat->save();
+        $cat = new Category(); $cat->name = 'Tech'; $cat->save();
+        $cat = new Category(); $cat->name = 'Inteligencia Artificial'; $cat->save();
     }
 
     /**
