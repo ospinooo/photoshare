@@ -56,8 +56,8 @@
         @if (count($post->getMedia('document')) > 4)
           <!--Controls-->
           <div class="controls-top">
-            <a class="black-text text-center" href="#multi-item-example" data-slide="prev"><i class="fas fa-angle-left fa-3x pr-3">></i></a>
-            <a class="black-text text-center" href="#multi-item-example" data-slide="next"><i class="fas fa-angle-right fa-3x pl-3"><</i></a>
+            <a class="black-text text-center" href="#multi-item-example" data-slide="prev"><i class="fas fa-caret-left fa-3x pl-3"></i></a>
+            <a class="black-text text-center" href="#multi-item-example" data-slide="next"><i class="fas fa-caret-right fa-3x pl-3"></i></a>
           </div>
           <!--/.Controls-->
         @endif
