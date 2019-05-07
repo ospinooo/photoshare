@@ -113,4 +113,22 @@ class UsersController extends Controller
       fclose($fp);
       return response()->download($filename);
     }
+
+
+    /**
+     *
+     *
+     */
+    public function export_csv(){
+      $data = User::get();
+      $filename = storage_path() . '/tmp/users.csv';
+      $fp = fopen($filename, 'w');
+
+      foreach ($data as $line) {
+          $myArray = json_decode(json_encode($line), true);
+          fputcsv($fp, (array) $myArray,',');
+      }
+      fclose($fp);
+      return response()->download($filename);
+    }
 }

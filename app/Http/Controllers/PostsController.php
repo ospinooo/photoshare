@@ -206,4 +206,39 @@ class PostsController extends Controller
       fclose($fp);
       return response()->download($filename);
     }
+
+    /**
+     *
+     *
+     */
+    public function export_csv(){
+      $data = Post::get();
+      $filename = storage_path() . '/tmp/posts.csv';
+      $fp = fopen($filename, 'w');
+
+      foreach ($data as $line) {
+          $myArray = json_decode(json_encode($line), true);
+          fputcsv($fp, (array) $myArray,',');
+      }
+      fclose($fp);
+      return response()->download($filename);
+    }
+
+
+    /**
+     *
+     *
+     */
+    public function import_csv(){
+      return 'HOLA';
+      $filename = storage_path() . '/tmp/posts.csv';
+      $fp = fopen($filename, 'w');
+      foreach ($data as $line) {
+          $myArray = json_decode(json_encode($line), true);
+          fputcsv($fp, (array) $myArray,',');
+      }
+      fclose($fp);
+      return 'uploaded';
+    }
+
 }

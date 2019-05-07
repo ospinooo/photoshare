@@ -16,6 +16,13 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
   Route::get('categories/json','CategoriesController@export_json');
   Route::get('posts/json','PostsController@export_json');
 
+  Route::get('users/csv','UsersController@export_csv');
+  Route::get('categories/csv','CategoriesController@export_csv');
+  Route::get('posts/csv','PostsController@export_csv');
+
+  Route::get('users/import_csv','UsersController@import_csv');
+  Route::get('categories/import_csv','CategoriesController@import_csv');
+  Route::get('posts/import_csv','PostsController@import_csv')->name('admin.posts.import_csv');
 
 
   Route::resource('categories', 'CategoriesController');
