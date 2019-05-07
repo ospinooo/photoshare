@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 use PDF;
-class CategoriesController extends Controller
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(User $user)
     {
         //
     }
@@ -52,10 +53,10 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(User $user)
     {
         //
     }
@@ -64,10 +65,10 @@ class CategoriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -75,14 +76,13 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(User $user)
     {
         //
     }
-
 
 
     /**
@@ -93,13 +93,13 @@ class CategoriesController extends Controller
     public function export_pdf()
     {
       // Fetch all customers from database
-      $data = Category::get();
+      $data = User::get();
       // Send data to the view using loadView function of PDF facade
-      $pdf = PDF::loadView('pdf.basic', ['data' => $data, 'title'=>'Categories']);
+      $pdf = PDF::loadView('pdf.basic', ['data' => $data, 'title'=>'Users']);
       // If you want to store the generated pdf to the server then you can use the store function
       $pdf->save(storage_path().'_filename.pdf');
       // Finally, you can download the file using download function
-      return $pdf->download('categories.pdf');
+      return $pdf->download('users.pdf');
     }
 
 
@@ -108,8 +108,8 @@ class CategoriesController extends Controller
      *
      */
     public function export_json(){
-      $data = Category::get();
-      $filename = storage_path() . '/tmp/categories.json';
+      $data = User::get();
+      $filename = storage_path() . '/tmp/users.json';
       $fp = fopen($filename, 'w');
       fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
       fclose($fp);

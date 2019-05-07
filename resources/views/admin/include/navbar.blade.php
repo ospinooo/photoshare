@@ -2,11 +2,11 @@
 <script src="{{ asset('js/search.js')}}"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="navbar-brand mb-0 h1">
-        <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" style="width:30px;">
-    </div>
+    <a class="navbar-brand mb-0 h1" href="/">
+      <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" style="width:30px;">
+    </a>
 
-    <a class="navbar-brand mb-0 h1" href="/">{{config('app.name', 'Photoshare')}} Administration</a>
+    <a class="navbar-brand mb-0 h1" href="/admin">{{config('app.name', 'Photoshare')}} Administration</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
