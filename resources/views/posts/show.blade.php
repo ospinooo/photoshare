@@ -19,28 +19,15 @@
       }
     </style>
 
+    <script src="{{ asset('js/like.js')}}"></script>
     <a href="/posts" class="btn btn-default">Go Back</a>
     <h1>{{$post->title}}
-      @if (True)
-        <button id="like" value="True" onclick="changeLike()"class="btn"><i class="far fa-heart fa-2x"></i></button>
+      @if ($like)
+        <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="fas fa-heart fa-2x"></i></button>
       @else
-        <button id="like" value="False" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+        <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
       @endif
     </h1>
-
-    <script>
-      var like_button = document.getElementById('like');
-      function changeLike() {
-          if (like_button.value == "True") {
-            like_button.value = "False";
-            like_button.innerHTML = '<i class="fas fa-heart fa-2x"></i>';
-          } else {
-            like_button.value = "True";
-            like_button.innerHTML = '<i class="far fa-heart fa-2x"></i>';
-          }
-      }
-
-    </script>
 
     <div>
         {{$post->body}}

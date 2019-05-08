@@ -88,7 +88,18 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show')->with('post', $post);
+        $user = Auth::user();
+        $like = DB::select('select likes.like from likes where user_id = '. $user->id . ' AND  post_id = ' . $post->id . ';');
+
+        if (count($like) == 0) {
+          $like = False;
+        } else {
+          $like = $like[0]->like == 1;
+        }
+
+        return view('posts.show')
+          ->with('post', $post)
+          ->with('like', $like);
     }
 
     /**
