@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Post;
 use PDF;
 
 class UsersController extends Controller
@@ -47,7 +48,11 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        //
+      $posts = Post::where('user_id', $user->id)
+        ->paginate(10);
+      return view('users.show')
+        ->with('user', $user)
+        ->with('posts', $posts);
     }
 
     /**
@@ -58,7 +63,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit')
+          ->with('user', $user);
     }
 
     /**
@@ -70,7 +76,20 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        if (null == $request->input('admin')) {
+          $user->admin = 0;
+        }else {
+          $user->admin = $request->input('admin');
+        }
+
+        $user->name = $request->input('name');
+        $user->save();
+
+        return redirect('admin/users')->with('success', 'User Updated');
     }
 
     /**
@@ -130,5 +149,18 @@ class UsersController extends Controller
       }
       fclose($fp);
       return response()->download($filename);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyAdminusers(User $user)
+    {
+        $user->delete();
+        return redirect('admin/users')->with('error', 'User Deleted');
     }
 }
