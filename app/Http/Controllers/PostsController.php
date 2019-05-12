@@ -26,6 +26,7 @@ class PostsController extends Controller
      */
     public function index()
     {
+        return redirect('/');
         //SAME
         //$posts = DB::select('SELECT * FROM posts');
         //$posts = Post::all();
@@ -89,13 +90,16 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         $user = Auth::user();
-        $like = DB::select('select likes.like from likes where user_id = '. $user->id . ' AND  post_id = ' . $post->id . ';');
 
-        if (count($like) == 0) {
-          $like = False;
-        } else {
-          $like = $like[0]->like == 1;
+        if ($user) {
+          $like = DB::select('select likes.like from likes where user_id = '. $user->id . ' AND  post_id = ' . $post->id . ';');
+          if (count($like) == 0) {
+            $like = False;
+          } else {
+            $like = $like[0]->like == 1;
+          }
         }
+        $like = False;
 
         return view('posts.show')
           ->with('post', $post)
