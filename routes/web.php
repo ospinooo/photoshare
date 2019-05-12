@@ -24,6 +24,9 @@ Route::get('/services','PagesController@services');
 Route::resource('posts', 'PostsController');
 Route::post('posts/media', 'PostsController@storeMedia')->name('posts.media');
 
+Route::get('categories/{category}', 'CategoriesController@show')->name('categories.show');
+Route::get('user/{user}', 'UsersController@show')->name('user.show');
+
 Auth::routes();
 Auth::routes(['verify' => true]);
 
