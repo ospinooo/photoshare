@@ -33,7 +33,7 @@ class AdminController extends Controller
         ->with('table', 'users')
         ->with('title', 'Users')
         ->with('models', $users)
-        ->with('modelController', 'PostsController');
+        ->with('modelController', 'UsersController');
     }
 
         /**
