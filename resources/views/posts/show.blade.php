@@ -22,10 +22,14 @@
     <script src="{{ asset('js/like.js')}}"></script>
     <a href="/posts" class="btn btn-default">Go Back</a>
     <h1>{{$post->title}}
-      @if ($like)
-        <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+      @if (Auth::check())
+        @if ($like)
+          <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+        @else
+          <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
+        @endif
       @else
-        <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
+        <button class="btn"><i class="far fa-heart fa-2x"></i><span>Register to enable this like.</span></button>
       @endif
     </h1>
 
@@ -66,108 +70,6 @@
             @endif
           @endfor
           </div>
-          <!--First slide-->
-          {{-- <div class="carousel-item active">
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(38).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(19).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(42).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(8).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-          </div>
-          <!--/.First slide--> --}}
-
-          <!--Second slide-->
-          {{-- <div class="carousel-item">
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-          </div> --}}
-          <!--/.Second slide-->
-
-          <!--Third slide-->
-          {{-- <div class="carousel-item">
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(64).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(51).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(59).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(63).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-          </div> --}}
-          <!--/.Third slide-->
-
         </div>
         <!--/.Slides-->
         <!--/.Carousel Wrapper-->
@@ -277,7 +179,7 @@
         <span class="close">&times;</span>
         <div class="row">
             <div class="col-sm-3"><div class="arrow arrow-left text-center"><<</div></div>
-            <div class="col-sm-6"><img class="modal-content" id="img01"></div>
+            <div class="col-sm-6"><img class="modal-content" name="img01"></div>
             <div class="col-sm-3"><div class="arrow arrow-right text-center">>></div></div>
           </div>
         <!-- Modal Content (The Image) -->
@@ -299,7 +201,7 @@
       var modal = document.getElementById('myModal');
 
       // Get the image and insert it inside the modal - use its "alt" text as a caption
-      var modalImg = document.getElementById("img01");
+      var modalImg = document.getElementsByName("img01")[0];
       var captionText = document.getElementById("caption");
 
 
@@ -308,24 +210,24 @@
 
       arrow_left.onclick = function () {
         var id;
-        if (featured.id == 0) {
+        if (modalImg.id == 0) {
           id = galleryItems.length-1;
         } else {
-          id = (parseInt(featured.id) - 1) % galleryItems.length;
+          id = (parseInt(modalImg.id) - 1) % galleryItems.length;
         }
-        featured.id = parseInt(id);
+        modalImg.id = parseInt(id);
         const media = post.media[id];
         modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
       }
 
       arrow_right.onclick = function () {
         var id;
-        if (featured.id === galleryItems.length - 1) {
+        if (modalImg.id === galleryItems.length - 1) {
           id = 0;
         } else {
-          id = (parseInt(featured.id) + 1) % galleryItems.length;
+          id = (parseInt(modalImg.id) + 1) % galleryItems.length;
         }
-        featured.id = parseInt(id);
+        modalImg.id = parseInt(id);
         const media = post.media[id];
         modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
       }
@@ -334,6 +236,7 @@
       featured.onclick = function(){
         modal.style.display = "block";
         const media = post.media[this.id];
+        modalImg.id = this.id;
         modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
         captionText.innerHTML = this.alt;
       }
@@ -346,6 +249,7 @@
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
         modal.style.display = "none";
+        featured.id = featured.id
       }
 
       function selectItem(e) {
