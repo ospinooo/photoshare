@@ -20,7 +20,7 @@
     </style>
 
     <script src="{{ asset('js/like.js')}}"></script>
-    <a href="/posts" class="btn btn-default">Go Back</a>
+
     <h1>{{$post->title}}
       @if (Auth::check())
         @if ($like)
@@ -77,12 +77,17 @@
     @endif
     <hr>
     <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-    <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
-    {{Form::open(['action' => ['PostsController@destroy', $post], 'method' => 'POST', 'class' => 'pull-right'])}}
-        {{Form::hidden('_method', 'DELETE')}}
-        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-    {{Form::close()}}
 
+
+    @if (Auth::check())
+      @if ($post->user_id == Auth::user()->id || Auth::user()->admin)
+      <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+        {{Form::open(['action' => ['PostsController@destroy', $post], 'method' => 'POST', 'class' => 'pull-right'])}}
+            {{Form::hidden('_method', 'DELETE')}}
+            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+        {{Form::close()}}
+      @endif
+    @endif
     <style>
       /* Style the Image Used to Trigger the Modal */
       #myImg {
