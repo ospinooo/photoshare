@@ -187,7 +187,7 @@ class PostsController extends Controller
      *
      */
     public function rankingIndex(Request $request){
-        $posts = Post::orderBy('id','desc')->paginate(10);
+        $posts = Post::orderBy('likes','desc')->paginate(5);
         return view('posts.ranking')->with('posts', $posts);
     }
 
@@ -240,20 +240,45 @@ class PostsController extends Controller
     }
 
 
+
     /**
      *
      *
      */
-    public function import_csv(){
-      return 'HOLA';
-      $filename = storage_path() . '/tmp/posts.csv';
-      $fp = fopen($filename, 'w');
-      foreach ($data as $line) {
-          $myArray = json_decode(json_encode($line), true);
-          fputcsv($fp, (array) $myArray,',');
+    public function import_csv(Request $request){
+      $filename = $request->file->getClientOriginalName();
+      $request->file->storeAs('csv', $request->file->getClientOriginalName());
+
+      $path = storage_path('app/csv/'. $filename);
+      $fp = fopen($path, 'r');
+      $row=0;
+
+      while (($data =fgetcsv($fp, 1000, ",")) !== FALSE) {
+          $post = new Post();
+          $post->title = $data[1];
+          $post->body = $data[2];
+          $post->created_at = $data[3];
+          $post->updated_at = $data[4];
+          $post->user_id = $data[5];
+          $post->category_id = $data[6];
+          $post->likes = $data[7];
+          $post->save();
       }
       fclose($fp);
-      return 'uploaded';
+      return redirect('admin/posts')->with('success', 'Posts Uploaded');
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyAdminposts(Post $post)
+    {
+        $post->delete();
+        return redirect('admin/posts')->with('error', 'Post Deleted');
     }
 
 }
