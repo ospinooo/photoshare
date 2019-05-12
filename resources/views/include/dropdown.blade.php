@@ -33,7 +33,7 @@
 
     @if (count($items[0]) > 0)
         @foreach ($items[0] as $category)
-            <a class="dropdown-item" href="/category/{{$category->id}}">
+            <a class="dropdown-item" href="/categories/{{$category->id}}">
                 <i class="fas fa-layer-group"></i>
                 {{$category->name}}
             </a>
