@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Post;
 use PDF;
 class CategoriesController extends Controller
 {
@@ -24,7 +26,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -35,7 +37,15 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request, [
+          'name' => 'required',
+      ]);
+
+      $category = new Category();
+      $category->name = $request->input('name');
+      $category->save();
+
+      return redirect('admin/categories')->with('success', 'Category Created');
     }
 
     /**
@@ -46,7 +56,10 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $posts = Post::where('category_id', $category->id)
+          ->paginate(10);
+        return view('categories.show')
+          ->with('posts', $posts);
     }
 
     /**
@@ -57,7 +70,8 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+      return view('categories.edit')
+      ->with('category', $category);
     }
 
     /**
@@ -69,7 +83,14 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $category->name = $request->input('name');
+        $category->save();
+
+        return redirect('admin/categories')->with('success', 'Category Updated');
     }
 
     /**
@@ -130,5 +151,42 @@ class CategoriesController extends Controller
       }
       fclose($fp);
       return response()->download($filename);
+    }
+
+
+    /**
+     *
+     *
+     */
+    public function import_csv(Request $request){
+      $filename = $request->file->getClientOriginalName();
+      $request->file->storeAs('csv', $request->file->getClientOriginalName());
+
+      $path = storage_path('app/csv/'. $filename);
+      $fp = fopen($path, 'r');
+      $row=0;
+
+      while (($data =fgetcsv($fp, 1000, ",")) !== FALSE) {
+          $category = new Category();
+          $category->name = $data[1];
+          $category->created_at = $data[2];
+          $category->updated_at = $data[3];
+          $category->save();
+      }
+      fclose($fp);
+
+      return redirect('admin/categories')->with('success', 'Categories Uploaded');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyAdmincategories(Category $category)
+    {
+        $category->delete();
+        return redirect('admin/categories')->with('error', 'Category Deleted');
     }
 }
