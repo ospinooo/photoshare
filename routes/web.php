@@ -11,45 +11,25 @@
 |
 */
 
+include 'admin.php';
+include 'auth.php';
 
+//
 Route::get('/', 'PostsController@rankingIndex');
 Route::get('/search', 'SearchController');
 Route::get('/about', 'PagesController@about');
 Route::get('/services','PagesController@services');
+
+//
 Route::resource('posts', 'PostsController');
 Route::post('posts/media', 'PostsController@storeMedia')->name('posts.media');
-Route::view('/welcome','welcome');
-// Route::view('login', 'pages.login');
-// Route::view('signup', 'pages.signup');
 
+Route::get('categories/{category}', 'CategoriesController@show')->name('categories.show');
+Route::get('user/{user}', 'UsersController@show')->name('user.show');
 
-//Ruta al usuario
-Route::get('/prueba/{id}/nombre/{name}', function($id, $name){
-    //Aquí debería retornar una página genérica de usuario en la que se
-    //muestran los datos del usuario con ese id.
-    return 'This is the user '. $name . ' with id '. $id;
-});
-## return the view automatically => BLADE
-
-Route::any('/storage/{filename}', function ($filename)
-{
-    return $filename;
-    $path = storage_path('public/' . $filename);
-
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
 Auth::routes();
 Auth::routes(['verify' => true]);
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
+Route::get('/like', 'LikesController@like')->name('like');

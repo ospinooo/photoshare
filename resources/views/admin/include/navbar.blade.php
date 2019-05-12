@@ -3,10 +3,10 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand mb-0 h1" href="/">
-        <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" style="width:30px;">
+      <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" style="width:30px;">
     </a>
 
-    <a class="navbar-brand mb-0 h1" href="/">{{config('app.name', 'Photoshare')}}</a>
+    <a class="navbar-brand mb-0 h1" href="/admin">{{config('app.name', 'Photoshare')}} Administration</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,21 +14,27 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
+                <a class="nav-link" href="/admin/posts">Posts</a>
             </li>
 
-            @if (Auth::check())
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Actions
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/posts/create">Create Post</a>
-                    </div>
-                </li>
-            @endif
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/users">Users</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/categories">Categories</a>
+            </li>
+
+
+            {{-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/posts/create">Create Post</a>
+                </div>
+            </li> --}}
         </ul>
 
         <form class="form-inline my-2 my-lg-0" autocomplete="off">
@@ -57,12 +63,9 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                        @if (Auth::user()->admin)
-                          <a class="dropdown-item" href="/admin">
-                            {{ __('Administration') }}
-                          </a>
-                        @endif
+                        <a class="dropdown-item" href="/">
+                            {{ __('Home') }}
+                        </a>
 
                         <a class="dropdown-item" href="{{ route('logout') }}">
                             {{ __('Logout') }}

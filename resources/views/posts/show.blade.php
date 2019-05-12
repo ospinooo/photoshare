@@ -19,28 +19,19 @@
       }
     </style>
 
-    <a href="/posts" class="btn btn-default">Go Back</a>
+    <script src="{{ asset('js/like.js')}}"></script>
+
     <h1>{{$post->title}}
-      @if (True)
-        <button id="like" value="True" onclick="changeLike()"class="btn"><i class="far fa-heart fa-2x"></i></button>
+      @if (Auth::check())
+        @if ($like)
+          <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+        @else
+          <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
+        @endif
       @else
-        <button id="like" value="False" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+        <button class="btn"><i class="far fa-heart fa-2x"></i><span>Register to enable this like.</span></button>
       @endif
     </h1>
-
-    <script>
-      var like_button = document.getElementById('like');
-      function changeLike() {
-          if (like_button.value == "True") {
-            like_button.value = "False";
-            like_button.innerHTML = '<i class="fas fa-heart fa-2x"></i>';
-          } else {
-            like_button.value = "True";
-            like_button.innerHTML = '<i class="far fa-heart fa-2x"></i>';
-          }
-      }
-
-    </script>
 
     <div>
         {{$post->body}}
@@ -56,8 +47,8 @@
         @if (count($post->getMedia('document')) > 4)
           <!--Controls-->
           <div class="controls-top">
-            <a class="black-text text-center" href="#multi-item-example" data-slide="prev"><i class="fas fa-angle-left fa-3x pr-3">></i></a>
-            <a class="black-text text-center" href="#multi-item-example" data-slide="next"><i class="fas fa-angle-right fa-3x pl-3"><</i></a>
+            <a class="black-text text-center" href="#multi-item-example" data-slide="prev"><i class="fas fa-caret-left fa-3x pl-3"></i></a>
+            <a class="black-text text-center" href="#multi-item-example" data-slide="next"><i class="fas fa-caret-right fa-3x pl-3"></i></a>
           </div>
           <!--/.Controls-->
         @endif
@@ -79,108 +70,6 @@
             @endif
           @endfor
           </div>
-          <!--First slide-->
-          {{-- <div class="carousel-item active">
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(38).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(19).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(42).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(8).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-          </div>
-          <!--/.First slide--> --}}
-
-          <!--Second slide-->
-          {{-- <div class="carousel-item">
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(25).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(26).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-          </div> --}}
-          <!--/.Second slide-->
-
-          <!--Third slide-->
-          {{-- <div class="carousel-item">
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(64).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(51).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(59).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <div class="card">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(63).jpg"
-                  alt="Card image cap">
-              </div>
-            </div>
-
-          </div> --}}
-          <!--/.Third slide-->
-
         </div>
         <!--/.Slides-->
         <!--/.Carousel Wrapper-->
@@ -188,12 +77,17 @@
     @endif
     <hr>
     <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-    <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
-    {{Form::open(['action' => ['PostsController@destroy', $post], 'method' => 'POST', 'class' => 'pull-right'])}}
-        {{Form::hidden('_method', 'DELETE')}}
-        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-    {{Form::close()}}
 
+
+    @if (Auth::check())
+      @if ($post->user_id == Auth::user()->id || Auth::user()->admin)
+      <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+        {{Form::open(['action' => ['PostsController@destroy', $post], 'method' => 'POST', 'class' => 'pull-right'])}}
+            {{Form::hidden('_method', 'DELETE')}}
+            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+        {{Form::close()}}
+      @endif
+    @endif
     <style>
       /* Style the Image Used to Trigger the Modal */
       #myImg {
@@ -290,7 +184,7 @@
         <span class="close">&times;</span>
         <div class="row">
             <div class="col-sm-3"><div class="arrow arrow-left text-center"><<</div></div>
-            <div class="col-sm-6"><img class="modal-content" id="img01"></div>
+            <div class="col-sm-6"><img class="modal-content" name="img01"></div>
             <div class="col-sm-3"><div class="arrow arrow-right text-center">>></div></div>
           </div>
         <!-- Modal Content (The Image) -->
@@ -312,7 +206,7 @@
       var modal = document.getElementById('myModal');
 
       // Get the image and insert it inside the modal - use its "alt" text as a caption
-      var modalImg = document.getElementById("img01");
+      var modalImg = document.getElementsByName("img01")[0];
       var captionText = document.getElementById("caption");
 
 
@@ -321,24 +215,24 @@
 
       arrow_left.onclick = function () {
         var id;
-        if (featured.id == 0) {
+        if (modalImg.id == 0) {
           id = galleryItems.length-1;
         } else {
-          id = (parseInt(featured.id) - 1) % galleryItems.length;
+          id = (parseInt(modalImg.id) - 1) % galleryItems.length;
         }
-        featured.id = parseInt(id);
+        modalImg.id = parseInt(id);
         const media = post.media[id];
         modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
       }
 
       arrow_right.onclick = function () {
         var id;
-        if (featured.id === galleryItems.length - 1) {
+        if (modalImg.id === galleryItems.length - 1) {
           id = 0;
         } else {
-          id = (parseInt(featured.id) + 1) % galleryItems.length;
+          id = (parseInt(modalImg.id) + 1) % galleryItems.length;
         }
-        featured.id = parseInt(id);
+        modalImg.id = parseInt(id);
         const media = post.media[id];
         modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
       }
@@ -347,6 +241,7 @@
       featured.onclick = function(){
         modal.style.display = "block";
         const media = post.media[this.id];
+        modalImg.id = this.id;
         modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
         captionText.innerHTML = this.alt;
       }
@@ -359,6 +254,7 @@
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
         modal.style.display = "none";
+        featured.id = featured.id
       }
 
       function selectItem(e) {
