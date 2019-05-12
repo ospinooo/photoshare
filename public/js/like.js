@@ -1,4 +1,4 @@
-var eventListenerSearch = function () {
+var eventListenerLike = function () {
   data = $(this).val()
   //var arr = data.split();
   $.ajax({
@@ -15,5 +15,5 @@ var eventListenerSearch = function () {
 }
 
 $(document).ready(function () {
-  $('#like').click(eventListenerSearch);
+  $('#like').click(eventListenerLike);
 });
