@@ -98,6 +98,7 @@ class PostsController extends Controller
           } else {
             $like = $like[0]->like == 1;
           }
+        } else {
           $like = False;
         }
 
