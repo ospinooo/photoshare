@@ -1,4 +1,4 @@
-<?
+<?php
 
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
