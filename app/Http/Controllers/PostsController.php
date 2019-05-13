@@ -98,8 +98,9 @@ class PostsController extends Controller
           } else {
             $like = $like[0]->like == 1;
           }
+          $like = False;
         }
-        $like = False;
+
 
         return view('posts.show')
           ->with('post', $post)
