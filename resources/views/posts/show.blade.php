@@ -14,7 +14,7 @@
       }
 
       .feature>img {
-        height: 500px;
+        height: 400px;
         width: auto;
       }
     </style>
@@ -126,7 +126,7 @@
         margin: auto;
         display: block;
         width: 80%;
-        max-width: 700px;
+        max-width: 800px;
       }
 
       /* Caption of Modal Image (Image Text) - Same Width as the Image */
@@ -183,9 +183,9 @@
         <!-- The Close Button -->
         <span class="close">&times;</span>
         <div class="row">
-            <div class="col-sm-3"><div class="arrow arrow-left text-center"><<</div></div>
-            <div class="col-sm-6"><img class="modal-content" name="img01"></div>
-            <div class="col-sm-3"><div class="arrow arrow-right text-center">>></div></div>
+            <div class="col-sm-1"><div class="arrow arrow-left text-center"><<</div></div>
+            <div class="col-sm-10"><img class="modal-content" name="img01"></div>
+            <div class="col-sm-1"><div class="arrow arrow-right text-center">>></div></div>
           </div>
         <!-- Modal Content (The Image) -->
 
