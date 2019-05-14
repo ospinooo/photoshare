@@ -217,11 +217,12 @@ class PostsController extends Controller
      */
     public function export_json(){
       $data = Post::get();
-      $filename = storage_path() . '/tmp/posts.json';
-      $fp = fopen($filename, 'w');
-      fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
-      fclose($fp);
-      return response()->download($filename);
+      // $filename = storage_path() . '/tmp/posts.json';
+      // $fp = fopen($filename, 'w');
+      // fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
+      // fclose($fp);
+      // return response()->download($filename);
+      return json_encode($data);
     }
 
     /**

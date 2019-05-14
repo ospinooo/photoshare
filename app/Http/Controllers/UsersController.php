@@ -128,11 +128,12 @@ class UsersController extends Controller
      */
     public function export_json(){
       $data = User::get();
-      $filename = storage_path() . '/tmp/users.json';
-      $fp = fopen($filename, 'w');
-      fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
-      fclose($fp);
-      return response()->download($filename);
+      // $filename = storage_path() . '/tmp/users.json';
+      // $fp = fopen($filename, 'w');
+      // fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
+      // fclose($fp);
+      // return response()->download($filename);
+      return json_encode($data);
     }
 
 
