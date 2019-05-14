@@ -17,13 +17,13 @@
                 {{Form::label('body', 'Body')}}
                 {{Form::textarea('body', '', ['class' => 'form-control', 'placeholder' => 'Body'])}}
         </div>
-        
+
         <div class="form-group">
             <label for="document">Images</label>
             <div class="needsclick dropzone" id="document-dropzone">
             </div>
         </div>
-    
+
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
     {!! Form::close() !!}
 @endsection
@@ -52,6 +52,7 @@
       }
       $('form').find('input[name="document[]"][value="' + name + '"]').remove()
     },
+    acceptedFiles: ".jpeg,.jpg,.png",
     init: function () {
       // UPDATE
       @if(isset($post) && $post->document)
