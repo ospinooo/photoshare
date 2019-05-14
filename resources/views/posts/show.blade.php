@@ -29,7 +29,7 @@
           <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
         @endif
       @else
-        <button class="btn"><i class="far fa-heart fa-2x"></i><span>Register to enable this like.</span></button>
+        <button id="like_not_register" class="btn"><i class="far fa-heart fa-2x"></i></button>
       @endif
     </h1>
 
@@ -194,7 +194,18 @@
         <div id="caption"></div>
       </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script>
+      var like = document.getElementById('like_not_register');
+      like.onclick = function () {
+        Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'You are not registered!',
+          footer: '<a href="/register">Register</a>'
+        });
+      }
+
       // Post data
       var post = {!! json_encode($post); !!};
 
