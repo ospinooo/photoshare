@@ -189,7 +189,7 @@ class UsersController extends Controller
 
       return redirect('admin/users')
         ->with('success', 'Users Uploaded')
-        ->with('errors', $errors);
+        ->with('errors_raw', $errors);
     }
 
 
