@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 use PDF;
 
 class UsersController extends Controller
@@ -149,6 +151,44 @@ class UsersController extends Controller
       }
       fclose($fp);
       return response()->download($filename);
+    }
+
+    /**
+     *
+     *
+     */
+    public function import_csv(Request $request){
+      $filename = $request->file->getClientOriginalName();
+      $request->file->storeAs('csv', $request->file->getClientOriginalName());
+
+      $path = storage_path('app/csv/'. $filename);
+      $fp = fopen($path, 'r');
+      $row=0;
+
+      $errors = [];
+      while (($data =fgetcsv($fp, 1000, ",")) !== FALSE) {
+          try{
+            $user = new User();
+            $user->name = $data[1];
+            $user->username = $data[2];
+            $user->email = $data[3];
+            $user->password = Hash::make('password');
+            $user->admin = $data[7];
+            $user->save();
+          } catch (QueryException $e) {
+            $errors[] = 'User with username ' .  $data[2] . ' not correctly loaded.';
+          }
+      }
+      fclose($fp);
+
+      if (count($errors) > 5) {
+        $errors = [];
+        $errors[0] = 'Some users have not been uploaded.';
+      }
+
+      return redirect('admin/users')
+        ->with('success', 'Users Uploaded')
+        ->with('errors', $errors);
     }
 
 

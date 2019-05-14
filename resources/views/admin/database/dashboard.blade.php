@@ -26,13 +26,13 @@ i  {
   </div>
 
 
-@if ($table != 'users')
+
   <form action="{{ route('admin.'.$table.'.import_csv') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="file" name="file" />
     <input type="submit" value=" Submit " />
   </form>
-@endif
+
 {{-- <a href='/{{ $models[0]->getTable() }}/pdf'><i class="fas fa-file-pdf"></i></a> --}}
 
 <table class="table table-striped table-hover table-users">
