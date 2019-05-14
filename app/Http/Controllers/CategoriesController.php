@@ -170,8 +170,6 @@ class CategoriesController extends Controller
       while (($data =fgetcsv($fp, 1000, ",")) !== FALSE) {
           $category = new Category();
           $category->name = $data[1];
-          $category->created_at = $data[2];
-          $category->updated_at = $data[3];
           $category->save();
       }
       fclose($fp);
