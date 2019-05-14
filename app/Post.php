@@ -18,23 +18,22 @@ class Post extends Model implements HasMedia
      */
     public function registerMediaConversions(Media $media = null)
     {
-        // Perform a resize and filter on images from the 'images' and 'anotherCollection' collections
-        // and save them as png files.
-        $this->addMediaConversion('medium')
-            ->fit(Manipulations::FIT_FILL, 1024, 768)
-            // ->setManipulations(['w' => 360, 'h' => 360])
-            ->performOnCollections('document');
-
-
         // Perform a resize and sharpen on every collection
         $this->addMediaConversion('small')
             ->fit(Manipulations::FIT_FILL, 800, 600)
             // ->setManipulations(['w' => 50, 'h' => 50])
             ->performOnCollections('document');
 
+        // Perform a resize and filter on images from the 'images' and 'anotherCollection' collections
+        // and save them as png files.
+        $this->addMediaConversion('medium')
+            ->fit(Manipulations::FIT_MAX, 1024, 768)
+            // ->setManipulations(['w' => 360, 'h' => 360])
+            ->performOnCollections('document');
+
         // Perform a resize on every collection
         $this->addMediaConversion('big')
-            ->fit(Manipulations::FIT_FILL, 1600, 1200)
+            ->fit(Manipulations::FIT_MAX, 1600, 1200)
             //->setManipulations(['w' => 700, 'h' => 700])
             ->performOnCollections('document');
     }
