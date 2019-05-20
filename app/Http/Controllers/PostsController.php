@@ -26,7 +26,6 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return redirect('/');
         //SAME
         //$posts = DB::select('SELECT * FROM posts');
         //$posts = Post::all();

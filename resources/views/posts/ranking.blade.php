@@ -19,7 +19,6 @@
                 <div class="text-center">Posted by {{$post->user->name}}</div>
             </li>
         @endforeach
-        {{$posts->links()}}
     @else
         <p>No Posts Found</p>
     @endif
