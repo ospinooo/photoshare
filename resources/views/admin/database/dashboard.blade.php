@@ -8,10 +8,36 @@ i  {
   color: #212529;
   background-color: white;
 }
+/* Tooltip container */
+.tooltip1 {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip1 .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip1:hover .tooltiptext {
+  visibility: visible;
+}
 
 </style>
 <div class="row">
-    <div class="col-sm-2"><h1>{{$title}}</h1></div>
+    <div class="col-sm-2"><h1>{{$title}}</h1>
+    </div>
     <div class="col-sm-8"></div>
     <div class="col-sm-2">
       <h1>
@@ -26,11 +52,13 @@ i  {
   </div>
 
 
-
   <form action="{{ route('admin.'.$table.'.import_csv') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="file" name="file" />
     <input type="submit" value=" Submit " />
+    <div class="tooltip1"><i class="fas fa-info-circle"></i>
+      <span class="tooltiptext">Before loading a csv file, download a csv a use it as a template</span>
+  </div>
   </form>
 
 {{-- <a href='/{{ $models[0]->getTable() }}/pdf'><i class="fas fa-file-pdf"></i></a> --}}
