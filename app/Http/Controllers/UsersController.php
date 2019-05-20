@@ -181,15 +181,12 @@ class UsersController extends Controller
           }
       }
       fclose($fp);
-
-      if (count($errors) > 5) {
-        $errors = [];
-        $errors[0] = 'Some users have not been uploaded.';
+      if (count($errors) > 0){
+        return redirect('admin/users')->with('error', 'Some users have not been uploaded.');
+      } else {
+        return redirect('admin/users')->with('success', 'Users Uploaded');
       }
 
-      return redirect('admin/users')
-        ->with('success', 'Users Uploaded')
-        ->with('errors_raw', $errors);
     }
 
 
