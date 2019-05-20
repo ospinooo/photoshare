@@ -107,11 +107,11 @@ class LikesController extends Controller
           $like = $like[0];
           if ($like->like == 1){
             DB::update('update `likes` set likes.like = 0 where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
-            DB::update('update posts set posts.likes = posts.likes + 1 where id = '. $post_id);
+            DB::update('update posts set posts.likes = posts.likes - 1 where id = '. $post_id);
             $like->like = 0;
           } else {
             DB::update('update `likes` set likes.like = 1 where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
-            DB::update('update posts set posts.likes = posts.likes - 1 where id = '. $post_id);
+            DB::update('update posts set posts.likes = posts.likes + 1 where id = '. $post_id);
             $like->like = 1;
           }
         }
