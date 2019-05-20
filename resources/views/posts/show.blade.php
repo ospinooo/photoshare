@@ -33,9 +33,9 @@
     <h1>{{$post->title}}
       @if (Auth::check())
         @if ($like)
-          <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="fas fa-heart fa-2x"></i></button>
+          <button id="like" value="{{$post->id . ','. Auth::user()->id}}" class="btn"><i class="fas fa-heart fa-2x"></i></button>
         @else
-          <button id="like" value="{{$post->id . ' '. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
+          <button id="like" value="{{$post->id . ','. Auth::user()->id}}" class="btn"><i class="far fa-heart fa-2x"></i></button>
         @endif
       @else
         <button id="like_not_register" onclick="alertNotRegistered()" class="btn"><i class="far fa-heart fa-2x"></i></button>

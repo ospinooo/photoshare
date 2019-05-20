@@ -93,15 +93,17 @@ class LikesController extends Controller
      */
     public function like(Request $request)
     {
-        list($post_id, $user_id) = explode(' ', $request->data);
+        list($post_id, $user_id) = explode(',', $request->data);
         $like = DB::select('select likes.like from likes where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
 
+        $like_show = 0;
         if (count($like) == 0) {
           $like = new Like();
           $like->user_id = (int) $user_id;
           $like->post_id = (int) $post_id;
           $like->like = 1;
           $like->save();
+          $like_show = 1;
           DB::update('update posts set posts.likes = posts.likes + 1 where id = '. $post_id);
         } else {
           $like = $like[0];
