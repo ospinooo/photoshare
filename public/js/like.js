@@ -1,4 +1,4 @@
-var eventListenerLike = function () {
+function eventListenerLike() {
   data = $(this).val()
   //var arr = data.split();
   $.ajax({
