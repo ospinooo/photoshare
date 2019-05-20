@@ -29,7 +29,7 @@ class PostsController extends Controller
         //SAME
         //$posts = DB::select('SELECT * FROM posts');
         //$posts = Post::all();
-        $posts = Post::orderBy('created_at','desc')->paginate(10);
+        $posts = Post::orderBy('created_at','desc')->paginate(5);
         return view('posts.index')->with('posts', $posts);
     }
 
