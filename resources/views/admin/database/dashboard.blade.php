@@ -57,10 +57,11 @@ i  {
             @endif
           @endforeach
 
-
-          <td>
-            <a class="btn btn-primary blue-stripe" href='{{config('app.url')}}/admin/{{$table}}/{{$model->id}}/edit'>Edit</a>
-          </td>
+          @if ($table!='posts')
+            <td>
+              <a class="btn btn-primary blue-stripe" href='{{config('app.url')}}/admin/{{$table}}/{{$model->id}}/edit'>Edit</a>
+            </td>
+          @endif
 
           <td>
 
