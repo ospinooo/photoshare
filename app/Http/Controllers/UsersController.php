@@ -85,7 +85,7 @@ class UsersController extends Controller
         if (null == $request->input('admin')) {
           $user->admin = 0;
         }else {
-          $user->admin = $request->input('admin');
+          $user->admin = 1;
         }
 
         $user->name = $request->input('name');
