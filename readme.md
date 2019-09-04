@@ -1,3 +1,20 @@
+
+# Photoshare
+
+Photoshare is a social website. You are able to create your own posts. Write about whatever you want and to upload as many pictures as you want.
+
+You can tell people you like their posts by giving a like.
+
+# Author
+## Pablo Ospino Sánchez.
+
+> The goal of this little project was to learn laravel and be able apply it into a real project.
+
+---
+
+
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
@@ -6,30 +23,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
-
-## Photoshare
-
-Bash Comand to connect with ssh:
-```
-ssh grupo30@webalumnos.tlm.unavarra.es -p 10700
-```
-
-```
-mysql -h dbserver -u grupo30 -p
-```
-
-## Bootstrap
-```
-npm install # node-modules
-npm run dev # recompile-libraries (Changes colors)
-```
-
-## Migrate
-Deletes all data into the database and create the new tables specified in migration folder
-```
-php artisan migrate
-php artisan migrate:refresh # All
-```
 
 ## About Laravel
 
