@@ -8,11 +8,6 @@
             <li class="list-group-item">
                 <div class="well">
                     <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a><h5>Likes : {{$post->likes}}</h5></h3>
-                    {{-- @foreach ($post->getMedia('document') as $media)
-                    <div>
-                        <img src='{{$media->getUrl()}}' width="400px" height="400px">
-                    </div>
-                    @endforeach --}}
                 </div>
             </li>
         @endforeach

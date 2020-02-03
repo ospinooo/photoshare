@@ -11,10 +11,6 @@
                     @if (count($post->getMedia('document')) > 0)
                       <img class="rounded mx-auto" src='{{$post->getMedia('document')[0]->getUrl()}}' width="20%" height="20%">
                     @endif
-
-                    {{-- @foreach ($post->getMedia('document') as $media)
-                        <img class="rounded mx-auto" src='{{$media->getUrl()}}' width="20%" height="20%">
-                    @endforeach --}}
                 </div>
                 <div class="text-center">Posted by {{$post->user->name}}</div>
             </li>
