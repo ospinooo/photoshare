@@ -11,7 +11,8 @@ You can tell people you like their posts by giving a like.
 ## Stack used
 
 - `Laravel`: Php framework Back-end
-- `AWS S3 Bucket`: Cloud File System
+- `AWS S3 Bucket`: Cloud File System (images)
+- `Postgres`: SQL Database
 - `Heroku`: Deploy
 - `HTML, CSS & Javascript`: Front-end
 
