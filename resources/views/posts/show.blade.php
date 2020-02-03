@@ -209,7 +209,7 @@
 
       var galleryItems = document.querySelectorAll('.img-fluid');
       var featured = document.querySelector('.featured-item');
-      var domain = '{{ config("app.url") }}';
+      var domain = '{{ config("medialibrary.s3.domain") }}' + '/';
 
       // Get the modal
       var modal = document.getElementById('myModal');
@@ -231,7 +231,7 @@
         }
         modalImg.id = parseInt(id);
         const media = post.media[id];
-        modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
+        modalImg.src = domain + media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
       }
 
       arrow_right.onclick = function () {
@@ -243,7 +243,7 @@
         }
         modalImg.id = parseInt(id);
         const media = post.media[id];
-        modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
+        modalImg.src = domain +  media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
       }
 
 
@@ -251,7 +251,7 @@
         modal.style.display = "block";
         const media = post.media[this.id];
         modalImg.id = this.id;
-        modalImg.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
+        modalImg.src = domain +  media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
         captionText.innerHTML = this.alt;
       }
 
@@ -270,7 +270,7 @@
         const id = e.target.id;
         const media = post.media[id];
         featured.id = id
-        featured.src = domain + '/storage/'+ media.id + '/conversions/'+ media.name.split(' ').join('-') + '-medium.jpg';
+        featured.src = domain +  media.id + '/conversions/'+ media.name.split(' ').join('-') + '-medium.jpg';
       }
 
       (function init() {
