@@ -8,6 +8,21 @@ Photoshare is a social website. You are able to create your own posts. Write abo
 
 You can tell people you like their posts by giving a like.
 
+## Install
+
+```
+composer install
+```
+
+## Serve
+
+
+Remember before to set env variables in `.env` a file.
+```
+php artisan serve
+```
+
+
 ## Stack used
 
 - `Laravel`: Php framework Back-end
