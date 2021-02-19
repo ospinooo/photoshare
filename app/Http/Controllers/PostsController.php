@@ -70,8 +70,8 @@ class PostsController extends Controller
 
         if (count($user_posts) > 0){
             return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one post.');
-        } else if (count($files) > 1) {
-            return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one image.');
+        } else if (count($files) > 3) {
+            return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload max 3 images.');
         } else {
 
             $post = new Post();
