@@ -32,7 +32,7 @@
 <script>
   var uploadedDocumentMap = {}
   Dropzone.options.documentDropzone = {
-    url: '{{ route('posts.media') }}',
+    url: 'https://photoshare.pabloospino.com/posts/media',
     maxFilesize: 2, // MB
     addRemoveLinks: true,
     headers: {
