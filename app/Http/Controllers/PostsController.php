@@ -66,7 +66,13 @@ class PostsController extends Controller
 
         $user_posts = DB::select('select id from posts where user_id = '. Auth::id() . ';');
 
-        if (count($user_posts) == 0){
+        $files = $request->input('document', []);
+
+        if (count($user_posts) > 0){
+            return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one post.');
+        } else if (count($files) > 1) {
+            return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one image.');
+        } else {
 
             $post = new Post();
             $post->title = $request->input('title');
@@ -76,19 +82,11 @@ class PostsController extends Controller
 
             $post->save();
 
-            $files = $request->input('document', []);
-
-            if (count($files) > 1) {
-              return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one image.');
-            }
-
             foreach ($files as $file) {
                 $post->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
             }
 
             return redirect('/posts')->with('success', 'Post Created');
-        } else {
-            return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one post.');
         }
 
     }
