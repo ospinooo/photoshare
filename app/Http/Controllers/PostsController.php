@@ -64,20 +64,33 @@ class PostsController extends Controller
             'category' => 'required'
         ]);
 
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->category_id = $request->input('category');
-        $post->user_id = Auth::id();
+        $user_posts = DB::select('select id from posts where user_id = '. Auth::id() . ';');
 
-        $post->save();
+        if (count($user_posts) == 0){
 
-        // $post = Post::create($request->all());
-        foreach ($request->input('document', []) as $file) {
-            $post->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
+            $post = new Post();
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->category_id = $request->input('category');
+            $post->user_id = Auth::id();
+
+            $post->save();
+
+            $files = $request->input('document', []);
+
+            if (count($files) > 1) {
+              return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one image.');
+            }
+
+            foreach ($files as $file) {
+                $post->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('document');
+            }
+
+            return redirect('/posts')->with('success', 'Post Created');
+        } else {
+            return redirect('/posts')->with('error', 'Post not created. Free mode, you can only upload one post.');
         }
 
-        return redirect('/posts')->with('success', 'Post Created');
     }
 
     /**
