@@ -94,26 +94,26 @@ class LikesController extends Controller
     public function like(Request $request)
     {
         list($post_id, $user_id) = explode(',', $request->data);
-        $like = DB::select('select likes.like from likes where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
+        $like = DB::select('select likes.value from likes where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
 
         $like_show = 0;
         if (count($like) == 0) {
           $like = new Like();
           $like->user_id = (int) $user_id;
           $like->post_id = (int) $post_id;
-          $like->like = 1;
+          $like->value = 1;
           $like->save();
           $like_show = 1;
-          DB::update('update posts set posts.likes = posts.likes + 1 where id = '. $post_id);
+          DB::update('update posts set likes = likes + 1 where id = '. $post_id . ';');
         } else {
           $like = $like[0];
-          if ($like->like == 1){
-            DB::update('update `likes` set likes.like = 0 where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
-            DB::update('update posts set posts.likes = posts.likes - 1 where id = '. $post_id);
+          if ($like->value == 1){
+            DB::update('update likes set value = False where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
+            DB::update('update posts set likes = likes - 1 where id = '. $post_id);
             $like_show = 0;
           } else {
-            DB::update('update `likes` set likes.like = 1 where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
-            DB::update('update posts set posts.likes = posts.likes + 1 where id = '. $post_id);
+            DB::update('update likes set value = True where user_id = '. $user_id . ' AND  post_id = ' . $post_id . ';');
+            DB::update('update posts set likes = likes + 1 where id = '. $post_id);
             $like_show = 1;
           }
         }

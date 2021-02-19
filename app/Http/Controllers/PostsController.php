@@ -102,11 +102,11 @@ class PostsController extends Controller
         $user = Auth::user();
 
         if ($user) {
-          $like_object = DB::select('select likes.like from likes where user_id = '. $user->id . ' AND  post_id = ' . $post->id . ';');
+          $like_object = DB::select('select likes.value from likes where user_id = '. $user->id . ' AND  post_id = ' . $post->id . ';');
           if (count($like_object) == 0) {
             $like = False;
           } else {
-            $like = $like_object[0]->like == 1;
+            $like = $like_object[0]->value == 1;
           }
         } else {
           $like = False;
