@@ -49,7 +49,7 @@
     @if (count($post->getMedia('document')) > 0)
       <hr>
       <div class="feature">
-        <img id="0" class="featured-item" src="{{ asset($post->getMedia('document')[0]->getUrl('medium')) }}"></img>
+        <img id="0" class="featured-item" src="{{ asset($post->getMedia('document')[0]->getUrl()) }}"></img>
       </div>
       <!--Carousel Wrapper-->
       <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2" data-ride="carousel" align="center">
@@ -69,7 +69,7 @@
           @for ($i = 0; $i < count($post->getMedia('document')); $i++)
             <div class="col-md-3 mb-3">
               <div class="card">
-                <img class="img-fluid" id="{{$i}}" src="{{ asset($post->getMedia('document')[$i]->getUrl('small')) }}"
+                <img class="img-fluid" id="{{$i}}" src="{{ asset($post->getMedia('document')[$i]->getUrl()) }}"
                 alt="Card image cap" width="100%" height="50%">
               </div>
             </div>
@@ -231,7 +231,7 @@
         }
         modalImg.id = parseInt(id);
         const media = post.media[id];
-        modalImg.src = domain + media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
+        modalImg.src = domain + media.id + '/' + media.file_name;
       }
 
       arrow_right.onclick = function () {
@@ -243,15 +243,15 @@
         }
         modalImg.id = parseInt(id);
         const media = post.media[id];
-        modalImg.src = domain +  media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
+        modalImg.src = domain +  media.id + '/' + media.file_name;
       }
-
+      console.log(post.media);
 
       featured.onclick = function(){
         modal.style.display = "block";
         const media = post.media[this.id];
         modalImg.id = this.id;
-        modalImg.src = domain +  media.id + '/conversions/'+ media.name.split(' ').join('-') + '-big.jpg';
+        modalImg.src = domain +  media.id + '/' + media.file_name;
         captionText.innerHTML = this.alt;
       }
 
@@ -270,7 +270,7 @@
         const id = e.target.id;
         const media = post.media[id];
         featured.id = id
-        featured.src = domain +  media.id + '/conversions/'+ media.name.split(' ').join('-') + '-medium.jpg';
+        featured.src = domain +  media.id + '/' + media.file_name;
       }
 
       (function init() {
